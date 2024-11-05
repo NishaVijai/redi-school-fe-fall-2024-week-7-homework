@@ -75,13 +75,13 @@ displayValueOnAnHTMLElement("IncreasedMenuDatabase (increase all the menu prices
 // 3. A customer asks you about how many vegetarian dishes you have in the menu, for this you might want to filter the menu and get the amount of items filtered by the type: ‘vegetarian’. Call this variable: amountVegetariantDishes.
 const vegetarianDish = 'vegetarian';
 
-const amountVegetariantDishes = clonedMenuDatabase.filter(dish => dish[2] === vegetarianDish).length;
+const amountVegetariantDishes = menuDatabase.filter(dish => dish[2] === vegetarianDish).length;
 
 console.log(`amountVegetariantDishes: ${amountVegetariantDishes}`);
 displayValueOnAnHTMLElement("AmountVegetariantDishes", amountVegetariantDishes);
 
 // Extra
-const nameOfVegetarianDishes = clonedMenuDatabase
+const nameOfVegetarianDishes = menuDatabase
   .filter(dish => dish[2] === vegetarianDish)
   .map(dish => dish[0]);
 
@@ -91,7 +91,7 @@ displayValueOnAnHTMLElement("NameOfVegetarianDishes", nameOfVegetarianDishes);
 // 4. There’s a table that ordered all the dishes containing meat (1x time each dish), and they are ready to pay. Use the reduce method to get the total value of all the dishes that contain meat so that the customer can pay you. Call this variable: totalAmountMeatDishes.
 const meatDish = 'meat';
 
-const totalAmountMeatDishes = clonedMenuDatabase.reduce((accumulator, dish) => {
+const totalAmountMeatDishes = menuDatabase.reduce((accumulator, dish) => {
   if (dish[2] === meatDish) {
     return accumulator + dish[1];
   }
@@ -102,11 +102,11 @@ console.log(`totalAmountMeatDishes: ${totalAmountMeatDishes}`);
 displayValueOnAnHTMLElement("MeatDishesTotalAmount", totalAmountMeatDishes);
 
 // Extra
-const numberOfMeatDishes = clonedMenuDatabase.filter(dish => dish[2] === meatDish).length;
+const numberOfMeatDishes = menuDatabase.filter(dish => dish[2] === meatDish).length;
 console.log(`numberOfMeatDishes: ${numberOfMeatDishes}`);
 displayValueOnAnHTMLElement("NumberOfMeatDishes", numberOfMeatDishes);
 
-const nameOfMeatDishes = clonedMenuDatabase
+const nameOfMeatDishes = menuDatabase
   .filter(item => item[2] === meatDish)
   .map(item => item[0]);
 
