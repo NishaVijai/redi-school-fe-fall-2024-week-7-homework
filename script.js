@@ -1,60 +1,114 @@
-console.log("Week 4 - class assignment");
+console.log("Week 7 - JS - Arrays and array methods - Homework");
 
-const orderFoodFromDifferentRestaurants = (restaurantName, foodName, amountOfFood) => `You are ordering ${amountOfFood} ${foodName} from ${restaurantName}`;
+// Database
+// const menuDatabase = [
+// ['Papadum', 20, 'vegetarian'],
+// ['Pakora', 50, 'meat'],
+// ['Tandoori Chicken', 60, 'meat'],
+// ['Samosa', 50, 'vegetarian'],
+// ['Butter Chicken', 139, 'meat'],
+// ['Chicken Korma', 129, 'meat'],
+// ['Chicken Vindaloo', 149, 'meat'],
+// ['Saag Lamb', 130, 'meat'],
+// ['Lam Tikka Masala', 159, 'meat'],
+// ['Yellow Daal Tadka', 119, 'vegetarian'],
+// ['Biryani', 129, 'vegetarian'],
+// ['Gulab Jamun', 55, 'dessert'],
+// ['Mango Kulfi', 35, 'dessert'],
+// ['Rasmalai', 60, 'dessert'],
+// ];
 
-console.log(orderFoodFromDifferentRestaurants("Omo's Pizza", "Chicken Pizza", 5));
+// Above, you can find an array that represents the database of your restaurant’s website.
+// On this database we want you to do the following tasks:
+// 1. After some months of your restaurant being open, you realised that the last element in the menu hasn’t been sold in the last 4 months so you decide to remove it from the menu, use an array method to remove the last element of an array and save it in a variable called: removedMenuItem.
+// 2. Due to inflation you have gone through your finances and you realised that you need to increase all the menu prices by 10%. To do this we want to create a new array (called increasedMenuDatabase) containing all the menu items with the mentioned price increase.
+// 3. A customer asks you about how many vegetarian dishes you have in the menu, for this you might want to filter the menu and get the amount of items filtered by the type: ‘vegetarian’. Call this variable: amountVegetariantDishes.
+// 4. There’s a table that ordered all the dishes containing meat (1x time each dish), and they are ready to pay. Use the reduce method to get the total value of all the dishes that contain meat so that the customer can pay you. Call this variable: totalAmountMeatDishes.
 
-// **************
+const menuDatabase = [
+  ['Papadum', 20, 'vegetarian'],
+  ['Pakora', 50, 'meat'],
+  ['Tandoori Chicken', 60, 'meat'],
+  ['Samosa', 50, 'vegetarian'],
+  ['Butter Chicken', 139, 'meat'],
+  ['Chicken Korma', 129, 'meat'],
+  ['Chicken Vindaloo', 149, 'meat'],
+  ['Saag Lamb', 130, 'meat'],
+  ['Lam Tikka Masala', 159, 'meat'],
+  ['Yellow Daal Tadka', 119, 'vegetarian'],
+  ['Biryani', 129, 'vegetarian'],
+  ['Gulab Jamun', 55, 'dessert'],
+  ['Mango Kulfi', 35, 'dessert'],
+  ['Rasmalai', 60, 'dessert'],
+];
 
-// A. Create 3 HTML element divs
-// a. Add some text to 
+const displayValueElement = document.querySelector(".display_value");
 
-const first_div_element = document.getElementById("first_div");
+const displayValueOnAnHTMLElement = (message, elementValue) => {
+  let result = `<p class='display_result'>${message}: <span>${elementValue}</span></p> <br />`;
+  return displayValueElement.innerHTML += result;
+};
 
-// Not working
-// Can get only array of Elements - can not apply style on this fetched variable.
-// const second_div_element = document.getElementsByClassName("second_div");
+console.log(`menuDatabase: ${menuDatabase}`);
+displayValueOnAnHTMLElement("MenuDatabase (original array)", menuDatabase);
 
-// Working - to apply background color on the element
-const second_div_element = document.querySelector(".second_div");
+const clonedMenuDatabase = [...menuDatabase];
+console.log(`clonedMenuDatabase: ${clonedMenuDatabase}`);
+displayValueOnAnHTMLElement("ClonedMenuDatabase (copy of an array)", clonedMenuDatabase);
 
-// Not working
-// Can get only array of Elements - can not apply style on this fetched variable.
-// const third_div_element = document.getElementsByTagName("div");
+// 1. After some months of your restaurant being open, you realised that the last element in the menu hasn’t been sold in the last 4 months so you decide to remove it from the menu, use an array method to remove the last element of an array and save it in a variable called: removedMenuItem.
+const removedMenuItem = clonedMenuDatabase.pop();
+console.log(`removedMenuItem: ${removedMenuItem}`);
+displayValueOnAnHTMLElement("removedMenuItem (Last item from an array)", removedMenuItem);
 
-// Working - grabbin the first div
-// const third_div_element = document.querySelector("div");
-const third_div_element = document.querySelectorAll("div")[2];
+displayValueOnAnHTMLElement("ClonedMenuDatabase (copy of an array) - after applying pop() method", clonedMenuDatabase);
 
-const read_more_button_element = document.getElementById("read_more_button");
+// 2. Due to inflation you have gone through your finances and you realised that you need to increase all the menu prices by 10%. To do this we want to create a new array (called increasedMenuDatabase) containing all the menu items with the mentioned price increase.
+const increasedMenuDatabase = clonedMenuDatabase.map((menu) => {
+  const increadMenuPrice = menu[1] * 10 / 100;
+  return increadMenuPrice;
+});
 
-console.log(first_div_element);
-// first_div_element.innerHTML = "Test changing content";
+console.log(`increasedMenuDatabase: ${increasedMenuDatabase}`);
+displayValueOnAnHTMLElement("IncreasedMenuDatabase (increase all the menu prices by 10%)", increasedMenuDatabase);
 
-console.log(second_div_element);
-console.log(third_div_element);
-console.log(read_more_button_element);
+// 3. A customer asks you about how many vegetarian dishes you have in the menu, for this you might want to filter the menu and get the amount of items filtered by the type: ‘vegetarian’. Call this variable: amountVegetariantDishes.
+const vegetarianDish = 'vegetarian';
 
-read_more_button_element.setAttribute("disabled", true);
+const amountVegetariantDishes = clonedMenuDatabase.filter(dish => dish[2] === vegetarianDish).length;
 
-first_div_element.style.height = "100px";
-first_div_element.style.width = "300px";
-first_div_element.style.border = "2px solid red";
-first_div_element.style.backgroundColor = "coral";
+console.log(`amountVegetariantDishes: ${amountVegetariantDishes}`);
+displayValueOnAnHTMLElement("AmountVegetariantDishes", amountVegetariantDishes);
 
-second_div_element.style.height = "100px";
-second_div_element.style.width = "300px";
-second_div_element.style.border = "2px solid green";
-second_div_element.style.backgroundColor = "#87365e";
+// Extra
+const nameOfVegetarianDishes = clonedMenuDatabase
+  .filter(dish => dish[2] === vegetarianDish)
+  .map(dish => dish[0]);
 
-third_div_element.style.height = "100px";
-third_div_element.style.width = "300px";
-third_div_element.style.border = "2px solid blue";
-third_div_element.style.backgroundColor = "#00ff95";
+console.log(`nameOfVegetarianDishes: ${nameOfVegetarianDishes}`);
+displayValueOnAnHTMLElement("NameOfVegetarianDishes", nameOfVegetarianDishes);
 
-const createDivElement = document.createElement("div");
-const node = document.createTextNode("This is new.");
-const createPElement = document.createElement("p");
-// document.appendChild(createDivElement);
-first_div_element.appendChild(createPElement);
-createPElement.textContent = "New Element";
+// 4. There’s a table that ordered all the dishes containing meat (1x time each dish), and they are ready to pay. Use the reduce method to get the total value of all the dishes that contain meat so that the customer can pay you. Call this variable: totalAmountMeatDishes.
+const meatDish = 'meat';
+
+const totalAmountMeatDishes = clonedMenuDatabase.reduce((accumulator, dish) => {
+  if (dish[2] === meatDish) {
+    return accumulator + dish[1];
+  }
+  return accumulator;
+}, 0);
+
+console.log(`totalAmountMeatDishes: ${totalAmountMeatDishes}`);
+displayValueOnAnHTMLElement("MeatDishesTotalAmount", totalAmountMeatDishes);
+
+// Extra
+const numberOfMeatDishes = clonedMenuDatabase.filter(dish => dish[2] === meatDish).length;
+console.log(`numberOfMeatDishes: ${numberOfMeatDishes}`);
+displayValueOnAnHTMLElement("NumberOfMeatDishes", numberOfMeatDishes);
+
+const nameOfMeatDishes = clonedMenuDatabase
+  .filter(item => item[2] === meatDish)
+  .map(item => item[0]);
+
+console.log(`nameOfMeatDishes: ${nameOfMeatDishes}`);
+displayValueOnAnHTMLElement("NameOfMeatDishes", nameOfMeatDishes);
