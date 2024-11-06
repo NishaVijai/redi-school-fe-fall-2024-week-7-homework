@@ -58,30 +58,42 @@ displayValueOnAnHTMLElement("ClonedMenuDatabase (copy of an array)", clonedMenuD
 
 // 1. After some months of your restaurant being open, you realised that the last element in the menu hasn’t been sold in the last 4 months so you decide to remove it from the menu, use an array method to remove the last element of an array and save it in a variable called: removedMenuItem.
 const removedMenuItem = clonedMenuDatabase.pop();
-console.log(`removedMenuItem: ${removedMenuItem}`);
-displayValueOnAnHTMLElement("removedMenuItem (Last item from an array)", removedMenuItem);
+console.log(`RemovedMenuItem: ${removedMenuItem}`);
+displayValueOnAnHTMLElement("RemovedMenuItem (Last item from an array)", removedMenuItem);
 
 displayValueOnAnHTMLElement("ClonedMenuDatabase (copy of an array) - after applying pop() method", clonedMenuDatabase);
 
 // 2. Due to inflation you have gone through your finances and you realised that you need to increase all the menu prices by 10%. To do this we want to create a new array (called increasedMenuDatabase) containing all the menu items with the mentioned price increase.
 const increasedMenuDatabase = clonedMenuDatabase.map((menu) => {
-  const increadMenuPrice = menu[1] * 10 / 100;
-  return increadMenuPrice;
+  const [dishName, dishPrice, dishType] = menu;
+  // menu = [menu[1] * 1.1];
+  // return menu;
+  return [dishName, dishPrice * 1.1, dishType];
 });
 
 console.log(`increasedMenuDatabase: ${increasedMenuDatabase}`);
 displayValueOnAnHTMLElement("IncreasedMenuDatabase (increase all the menu prices by 10%)", increasedMenuDatabase);
 
+displayValueOnAnHTMLElement("ClonedMenuDatabase with increased menu price (increase all the menu prices by 10%)", clonedMenuDatabase);
+
 // 3. A customer asks you about how many vegetarian dishes you have in the menu, for this you might want to filter the menu and get the amount of items filtered by the type: ‘vegetarian’. Call this variable: amountVegetariantDishes.
 const vegetarianDish = 'vegetarian';
 
-const amountVegetariantDishes = menuDatabase.filter(dish => dish[2] === vegetarianDish).length;
+// const amountVegetariantDishes = clonedMenuDatabase.filter(dish => dish[2] === vegetarianDish).length;
+
+// Use - increasedMenuDatabase (increase all the menu prices by 10%)
+const amountVegetariantDishes = increasedMenuDatabase.filter(dish => dish[2] === vegetarianDish).length;
 
 console.log(`amountVegetariantDishes: ${amountVegetariantDishes}`);
 displayValueOnAnHTMLElement("AmountVegetariantDishes", amountVegetariantDishes);
 
 // Extra
-const nameOfVegetarianDishes = menuDatabase
+// const nameOfVegetarianDishes = clonedMenuDatabase
+//   .filter(dish => dish[2] === vegetarianDish)
+//   .map(dish => dish[0]);
+
+// Use - increasedMenuDatabase (increase all the menu prices by 10%)
+const nameOfVegetarianDishes = increasedMenuDatabase
   .filter(dish => dish[2] === vegetarianDish)
   .map(dish => dish[0]);
 
@@ -91,7 +103,15 @@ displayValueOnAnHTMLElement("NameOfVegetarianDishes", nameOfVegetarianDishes);
 // 4. There’s a table that ordered all the dishes containing meat (1x time each dish), and they are ready to pay. Use the reduce method to get the total value of all the dishes that contain meat so that the customer can pay you. Call this variable: totalAmountMeatDishes.
 const meatDish = 'meat';
 
-const totalAmountMeatDishes = menuDatabase.reduce((accumulator, dish) => {
+// const totalAmountMeatDishes = clonedMenuDatabase.reduce((accumulator, dish) => {
+//   if (dish[2] === meatDish) {
+//     return accumulator + dish[1];
+//   }
+//   return accumulator;
+// }, 0);
+
+// Use - increasedMenuDatabase (increase all the menu prices by 10%)
+const totalAmountMeatDishes = increasedMenuDatabase.reduce((accumulator, dish) => {
   if (dish[2] === meatDish) {
     return accumulator + dish[1];
   }
@@ -99,14 +119,22 @@ const totalAmountMeatDishes = menuDatabase.reduce((accumulator, dish) => {
 }, 0);
 
 console.log(`totalAmountMeatDishes: ${totalAmountMeatDishes}`);
-displayValueOnAnHTMLElement("MeatDishesTotalAmount", totalAmountMeatDishes);
+displayValueOnAnHTMLElement("MeatDishesTotalAmount (increase all the menu prices by 10%)", totalAmountMeatDishes);
 
 // Extra
-const numberOfMeatDishes = menuDatabase.filter(dish => dish[2] === meatDish).length;
+// const numberOfMeatDishes = clonedMenuDatabase.filter(dish => dish[2] === meatDish).length;
+
+// Use - increasedMenuDatabase (increase all the menu prices by 10%)
+const numberOfMeatDishes = increasedMenuDatabase.filter(dish => dish[2] === meatDish).length;
 console.log(`numberOfMeatDishes: ${numberOfMeatDishes}`);
 displayValueOnAnHTMLElement("NumberOfMeatDishes", numberOfMeatDishes);
 
-const nameOfMeatDishes = menuDatabase
+// const nameOfMeatDishes = clonedMenuDatabase
+//   .filter(item => item[2] === meatDish)
+//   .map(item => item[0]);
+
+// Use - increasedMenuDatabase (increase all the menu prices by 10%)
+const nameOfMeatDishes = increasedMenuDatabase
   .filter(item => item[2] === meatDish)
   .map(item => item[0]);
 
